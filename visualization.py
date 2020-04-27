@@ -54,6 +54,8 @@ def darraytogrid(A,theta):
 def depth_frametodarray(depthframe,numofrows):
     columnaverage = np.true_divide(depthframe.sum(0),(depthframe!=0).sum(0))
     return columnaverage
+
+
         
         
         
