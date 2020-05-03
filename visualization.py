@@ -8,7 +8,7 @@ def darraytogrid(A,theta):
     would be put at the coordinate 0,0
     theta is the distance between each pixel
     '''
-    returnlist = []
+    returnlist = set([])
     
     def sas(s1,a,s2):
         '''
@@ -39,11 +39,14 @@ def darraytogrid(A,theta):
         if dist==0:
             continue
             
-        y = round(saa(dist,90,abstheta),4)
-        x = round(math.sqrt(dist**2 - y**2),4)
+        y = round(saa(dist,90,abstheta)/1000,1)
+        if np.isnan(y):
+            continue
+        x = round(math.sqrt(dist**2 - y**2)/1000,1)
         
-            
-        returnlist.append((x,y))
+        returnlist.add((x,y))
+    print(len(returnlist))
+    print(returnlist)
         
     
     return returnlist
