@@ -1,6 +1,8 @@
 #visualization packages
 import math
 import numpy as np
+
+rounditemconfig = 1
 def darraytogrid(A,theta):
     '''
     This function will create a set of coordinates from a list A centered around 0.
@@ -38,17 +40,22 @@ def darraytogrid(A,theta):
         dist = A[i]
         if dist==0:
             continue
-            
-        y = round(saa(dist,90,abstheta)/1000,1)
+        
+        #Add occupancy item of 1 (something there)
+        y = round(saa(dist,90,abstheta)/1000,rounditemconfig)
         if np.isnan(y):
             continue
-        x = round(math.sqrt(dist**2 - y**2)/1000,1)
-        
-        returnlist.add((x,y))
-    print(len(returnlist))
-    print(returnlist)
-        
-    
+        x = round(math.sqrt(dist**2 - y**2)/1000,rounditemconfig)
+        returnlist.add((x,y,1))
+        #Add occupancy item of 0 (nothing there)
+        unocciter = math.floor((dist/1000)/0.1)
+        for j in range(unocciter):
+            dist_unocc = dist-((j+1)*100)
+            y = round(saa(dist_unocc,90,abstheta)/1000,rounditemconfig)
+            if np.isnan(y):
+                continue
+            x = round(math.sqrt(dist_unocc**2 - y**2)/1000,rounditemconfig)
+            returnlist.add((x,y,0))
     return returnlist
             
         
