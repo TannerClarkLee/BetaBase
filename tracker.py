@@ -20,11 +20,12 @@ cfg.enable_stream(rs.stream.pose)
 pipeline.start(cfg)
 #pipeline.start()
 ls = []
+import os
 
     
 # This call waits until a new coherent set of frames is available on a device
 # Calls to get_frame_data(...) and get_frame_timestamp(...) on a device will return stable values until wait_for_frames(...) is called
-for i in range(10):
+for i in range(1):
     frames = pipeline.wait_for_frames()
     pose_frame = frames.get_pose_frame()
 
@@ -34,8 +35,10 @@ for i in range(10):
     print("Position: {}".format(data.translation))
     print("Rotation: {}".format(data.rotation))
     print("Acceleration: {}\n".format(data.acceleration))
-    print('--------------------------------------------')
-    time.sleep(1)
+    print(type(data.rotation.y))
+    print(data.rotation.y)
+    time.sleep(0.25)
+    #os.system('cls' if os.name == 'nt' else "printf '\033c'")
     
 pipeline.stop()
 
