@@ -6,11 +6,9 @@ rounditemconfig = 1
 def darraytogrid(A,theta):
     '''
     This function will create a set of coordinates from a list A centered around 0.
-    The center is based on 1 meter.  Therefore, any center pixel's distance at 1m,
-    would be put at the coordinate 0,0
     theta is the distance between each pixel
     '''
-    returnlist = set([])
+    returnlist = {}
     
     def sas(s1,a,s2):
         '''
@@ -46,7 +44,7 @@ def darraytogrid(A,theta):
         if np.isnan(y):
             continue
         x = round(math.sqrt(dist**2 - y**2)/1000,rounditemconfig)
-        returnlist.add((x,y,1))
+        returnlist.update({(x,y):1})
         #Add occupancy item of 0 (nothing there)
         unocciter = math.floor((dist/1000)/0.1)
         for j in range(unocciter):
@@ -55,7 +53,7 @@ def darraytogrid(A,theta):
             if np.isnan(y):
                 continue
             x = round(math.sqrt(dist_unocc**2 - y**2)/1000,rounditemconfig)
-            returnlist.add((x,y,0))
+            returnlist.update({(x,y):0})
     return returnlist
             
         

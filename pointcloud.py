@@ -37,14 +37,15 @@ def run_depthframes(i):
     
     x,y,col=[],[],[]
     for item in cords:
+        if item[2]==0:
+            continue
         x.append(item[0])
         y.append(item[1])
-        col.append(item[2])
     
     
     
     plt.cla()
-    plt.scatter(x, y,c=col,cmap = 'jet')
+    plt.scatter(x, y)
 
 ani = FuncAnimation(plt.gcf(),run_depthframes,interval = 100)
 plt.tight_layout()
